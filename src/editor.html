@@ -1572,7 +1572,14 @@
 			}
 
 			zss_editor.focusContent = function() {
-				$('#zss_editor_content').focus();
+				var editor = $('#zss_editor_content');
+				var range = document.createRange();
+				range.selectNodeContents(editor.get(0));
+				range.collapse(false);
+				var selection = window.getSelection();
+				selection.removeAllRanges();
+				selection.addRange(range);
+				editor.focus();
 			}
 
 			zss_editor.focusTitle = function() {
